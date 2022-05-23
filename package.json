@@ -92,7 +92,7 @@
     }
   ],
   "dependencies": {
-    "parallax-controller": "^1.5.0"
+    "parallax-controller": "CTaylor1118/parallax-controller#feature/support-svgs"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

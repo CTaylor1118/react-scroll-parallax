@@ -5,7 +5,7 @@ import { ParallaxProps } from '../components/Parallax/types';
 import { getIsolatedParallaxProps } from '../helpers/getIsolatedParallaxProps';
 import { useParallaxController } from './useParallaxController';
 
-export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
+export function useParallax<T extends HTMLElement | SVGElement>(props: ParallaxProps) {
   const controller = useParallaxController();
   const ref = useRef<T>(null);
   const { parallaxProps } = getIsolatedParallaxProps(props);
@@ -17,7 +17,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
   // create element
   useEffect(() => {
     let newElement: Element | undefined;
-    if (ref.current instanceof HTMLElement) {
+    if (ref.current instanceof HTMLElement || ref.current instanceof SVGElement) {
       const options: CreateElementOptions = {
         el: ref.current,
         props: parallaxProps,
@@ -26,7 +26,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
       setElement(newElement);
     } else {
       throw new Error(
-        'You must assign the ref returned by the useParallax() hook to an HTML Element.'
+        'You must assign the ref returned by the useParallax() hook to an HTML or SVG Element.'
       );
     }
 
